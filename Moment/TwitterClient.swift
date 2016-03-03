@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import AFNetworking
 import BDBOAuth1Manager
 
 class TwitterClient: BDBOAuth1SessionManager {
     
     
-    static let shareInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com"), consumerKey: "uCAbCgc5y6hyxVL6J6qDu8CEM", consumerSecret: "fY7LEf50veRjuTTNthunOvmRUnIcv85SicthoSSX0hhSJOjtPL")
+    static let shareInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com"), consumerKey: "2uC2m4mgph54s9gP3gXAoZvWd", consumerSecret: "r2bZydajHG2qOICzVOg5uZRjLSRoH3Urbnp26ThLNB9HLnhe92")
     
     var loginSuccess: (() -> ())?
     var loginFailure: ((NSError) -> ())?
@@ -72,6 +73,40 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func favorite(tweetId: String,success:(AnyObject) ->(), failure: (NSError) -> ()) {
+        
+        POST("1.1/favorites/create.json?id=\(tweetId)", parameters: nil, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            success(response!)
+        }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+            failure(error)
+        }
+        
+    }
     
+    func unfavorite(tweetId: String,success:(AnyObject) ->(), failure: (NSError) -> ()) {
+        
+        POST("1.1/favorites/destroy.json?id=\(tweetId)", parameters: nil, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            success(response!)
+        }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+            failure(error)
+        }
+        
+    }
+    func retweet(tweetId: String,success:(AnyObject) ->(), failure: (NSError) -> ()) {
+        
+        POST("1.1/statuses/retweet/\(tweetId).json", parameters: nil, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            success(response!)
+        }) { (opreation: NSURLSessionDataTask?, error: NSError) -> Void in
+            failure(error)
+        }
+    }
+    func unretweet(tweetId: String,success:(AnyObject) ->(), failure: (NSError) -> ()) {
+        
+        POST("1.1/statuses/unretweet/\(tweetId).json", parameters: nil, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            success(response!)
+        }) { (opreation: NSURLSessionDataTask?, error: NSError) -> Void in
+            failure(error)
+        }
+    }
     
 }

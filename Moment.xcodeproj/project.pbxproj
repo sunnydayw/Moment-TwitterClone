@@ -10,7 +10,6 @@
 		8D9E159CA670E2CE4012AD7B /* Pods_Moment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD085A024A34B8CBA564F4C8 /* Pods_Moment.framework */; };
 		B38D39161C8287D1008E72B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38D39151C8287D1008E72B6 /* AppDelegate.swift */; };
 		B38D391B1C8287D1008E72B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38D39191C8287D1008E72B6 /* Main.storyboard */; };
-		B38D391D1C8287D1008E72B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B38D391C1C8287D1008E72B6 /* Assets.xcassets */; };
 		B38D39201C8287D1008E72B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38D391E1C8287D1008E72B6 /* LaunchScreen.storyboard */; };
 		B38D392B1C828C3D008E72B6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38D392A1C828C3D008E72B6 /* LoginViewController.swift */; };
 		B3FF9B491C829648004461AA /* TwitterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF9B481C829648004461AA /* TwitterClient.swift */; };
@@ -18,14 +17,14 @@
 		B3FF9B4D1C829661004461AA /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF9B4C1C829661004461AA /* Tweet.swift */; };
 		B3FF9B4F1C82A365004461AA /* TweetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF9B4E1C82A365004461AA /* TweetsViewController.swift */; };
 		B3FF9B511C82A519004461AA /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF9B501C82A519004461AA /* Color.swift */; };
-		B3FF9B541C82B88C004461AA /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF9B531C82B88C004461AA /* TweetTableViewCell.swift */; };
+		B3FF9B541C82B88C004461AA /* TweetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FF9B531C82B88C004461AA /* TweetCell.swift */; };
+		B3FF9B561C82C8D2004461AA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3FF9B551C82C8D2004461AA /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B38D39121C8287D1008E72B6 /* Moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38D39151C8287D1008E72B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B38D391A1C8287D1008E72B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B38D391C1C8287D1008E72B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B38D391F1C8287D1008E72B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B38D39211C8287D1008E72B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B38D392A1C828C3D008E72B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -34,7 +33,8 @@
 		B3FF9B4C1C829661004461AA /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		B3FF9B4E1C82A365004461AA /* TweetsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetsViewController.swift; sourceTree = "<group>"; };
 		B3FF9B501C82A519004461AA /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		B3FF9B531C82B88C004461AA /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
+		B3FF9B531C82B88C004461AA /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
+		B3FF9B551C82C8D2004461AA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD085A024A34B8CBA564F4C8 /* Pods_Moment.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Moment.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBD4360D90BFFBFF21F41A80 /* Pods-Moment.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moment.release.xcconfig"; path = "Pods/Target Support Files/Pods-Moment/Pods-Moment.release.xcconfig"; sourceTree = "<group>"; };
 		F31383368D9907CD7DFEF73F /* Pods-Moment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moment.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Moment/Pods-Moment.debug.xcconfig"; sourceTree = "<group>"; };
@@ -96,9 +96,9 @@
 				B38D39271C828BF4008E72B6 /* ViewController */,
 				B38D39151C8287D1008E72B6 /* AppDelegate.swift */,
 				B38D39191C8287D1008E72B6 /* Main.storyboard */,
-				B38D391C1C8287D1008E72B6 /* Assets.xcassets */,
 				B38D391E1C8287D1008E72B6 /* LaunchScreen.storyboard */,
 				B38D39211C8287D1008E72B6 /* Info.plist */,
+				B3FF9B551C82C8D2004461AA /* Images.xcassets */,
 			);
 			path = Moment;
 			sourceTree = "<group>";
@@ -133,7 +133,7 @@
 		B3FF9B521C82B867004461AA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B3FF9B531C82B88C004461AA /* TweetTableViewCell.swift */,
+				B3FF9B531C82B88C004461AA /* TweetCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -200,8 +200,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3FF9B561C82C8D2004461AA /* Images.xcassets in Resources */,
 				B38D39201C8287D1008E72B6 /* LaunchScreen.storyboard in Resources */,
-				B38D391D1C8287D1008E72B6 /* Assets.xcassets in Resources */,
 				B38D391B1C8287D1008E72B6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -268,7 +268,7 @@
 				B38D392B1C828C3D008E72B6 /* LoginViewController.swift in Sources */,
 				B3FF9B491C829648004461AA /* TwitterClient.swift in Sources */,
 				B38D39161C8287D1008E72B6 /* AppDelegate.swift in Sources */,
-				B3FF9B541C82B88C004461AA /* TweetTableViewCell.swift in Sources */,
+				B3FF9B541C82B88C004461AA /* TweetCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +380,7 @@
 			baseConfigurationReference = F31383368D9907CD7DFEF73F /* Pods-Moment.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = Moment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "QingTian-Chen.Moment";
@@ -392,6 +393,7 @@
 			baseConfigurationReference = EBD4360D90BFFBFF21F41A80 /* Pods-Moment.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				INFOPLIST_FILE = Moment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "QingTian-Chen.Moment";
