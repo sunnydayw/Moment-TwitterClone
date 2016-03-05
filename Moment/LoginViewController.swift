@@ -10,10 +10,12 @@ import UIKit
 import BDBOAuth1Manager
 
 class LoginViewController: UIViewController {
+    @IBOutlet weak var buttonView: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        buttonView.backgroundColor = Color.twitterBlue()
+        buttonView.layer.cornerRadius = 3
         // Do any additional setup after loading the view.
     }
 

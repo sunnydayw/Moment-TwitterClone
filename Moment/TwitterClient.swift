@@ -13,7 +13,7 @@ import BDBOAuth1Manager
 class TwitterClient: BDBOAuth1SessionManager {
     
     
-    static let shareInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com"), consumerKey: "2uC2m4mgph54s9gP3gXAoZvWd", consumerSecret: "r2bZydajHG2qOICzVOg5uZRjLSRoH3Urbnp26ThLNB9HLnhe92")
+    static let shareInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com"), consumerKey: "Mb2xUc9QtXL8cfWOuQsge1Bng", consumerSecret: "sutBgp9orvFLTP8BZvVIDlTyVD123aqaoLcI0TeQUbKm6iJEK5")
     
     var loginSuccess: (() -> ())?
     var loginFailure: ((NSError) -> ())?
@@ -60,6 +60,18 @@ class TwitterClient: BDBOAuth1SessionManager {
             success(tweets)
         }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
             failure(error)
+        })
+    }
+    
+    func homeTimelineWithOffset(count: Int, success: ([Tweet]) -> (), failure: (NSError) -> ()) {
+        var parameter: [String: AnyObject] = ["count": count]
+        parameter["count"] = count
+        GET("1.1/statuses/home_timeline.json", parameters: parameter, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let dictionaries = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(dictionaries)
+            success(tweets)
+        }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                failure(error)
         })
     }
     

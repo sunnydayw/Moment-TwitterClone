@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8D9E159CA670E2CE4012AD7B /* Pods_Moment.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD085A024A34B8CBA564F4C8 /* Pods_Moment.framework */; };
+		B34A375D1C89549F00355C55 /* InfiniteScrollActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A375C1C89549F00355C55 /* InfiniteScrollActivityView.swift */; };
+		B34A375F1C8ABDD700355C55 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A375E1C8ABDD700355C55 /* LaunchViewController.swift */; };
 		B38D39161C8287D1008E72B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38D39151C8287D1008E72B6 /* AppDelegate.swift */; };
 		B38D391B1C8287D1008E72B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38D39191C8287D1008E72B6 /* Main.storyboard */; };
 		B38D39201C8287D1008E72B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B38D391E1C8287D1008E72B6 /* LaunchScreen.storyboard */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B34A375C1C89549F00355C55 /* InfiniteScrollActivityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteScrollActivityView.swift; sourceTree = "<group>"; };
+		B34A375E1C8ABDD700355C55 /* LaunchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		B38D39121C8287D1008E72B6 /* Moment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Moment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38D39151C8287D1008E72B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B38D391A1C8287D1008E72B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 			children = (
 				B38D392A1C828C3D008E72B6 /* LoginViewController.swift */,
 				B3FF9B4E1C82A365004461AA /* TweetsViewController.swift */,
+				B34A375E1C8ABDD700355C55 /* LaunchViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 				B3FF9B4A1C829657004461AA /* User.swift */,
 				B3FF9B4C1C829661004461AA /* Tweet.swift */,
 				B3FF9B501C82A519004461AA /* Color.swift */,
+				B34A375C1C89549F00355C55 /* InfiniteScrollActivityView.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -261,6 +267,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34A375D1C89549F00355C55 /* InfiniteScrollActivityView.swift in Sources */,
+				B34A375F1C8ABDD700355C55 /* LaunchViewController.swift in Sources */,
 				B3FF9B4B1C829657004461AA /* User.swift in Sources */,
 				B3FF9B4D1C829661004461AA /* Tweet.swift in Sources */,
 				B3FF9B511C82A519004461AA /* Color.swift in Sources */,

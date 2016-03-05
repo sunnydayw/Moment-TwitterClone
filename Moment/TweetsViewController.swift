@@ -14,6 +14,10 @@ class TweetsViewController: UIViewController, TweetCellDelegate {
     var tweets: [Tweet]?
     var likeStates = [Int:Bool]()
     var retweetStates = [Int:Bool]()
+    var offset = 20
+    var isMoreDataLoading = false
+    var loadingMoreView:InfiniteScrollActivityView?
+
     
     let refreshControl = UIRefreshControl()
     
@@ -25,20 +29,14 @@ class TweetsViewController: UIViewController, TweetCellDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         //tweets = []
-        TwitterClient.shareInstance.homeTimeline({ (tweets: [Tweet]) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-            for (index,tweet) in tweets.enumerate() {
-                self.likeStates[index] = tweet.isFavorited
-                self.retweetStates[index] = tweet.isRetweeted
-            }
-        }) { (error: NSError) -> () in
-            print(error.localizedDescription)
-        }
+        loadMoreData()
+
         addStyle()
         
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
+        
+        scrollViewSetup()
         
 }
 
@@ -105,6 +103,19 @@ extension TweetsViewController: UITableViewDelegate,UITableViewDataSource {
         retweetStates[indexPath.row] = value
     }
     
+    func loadMoreData() {
+        TwitterClient.shareInstance.homeTimelineWithOffset(offset, success:{ (tweets: [Tweet]) -> () in
+            self.tweets = tweets
+            self.tableView.reloadData()
+            for (index,tweet) in tweets.enumerate() {
+                self.likeStates[index] = tweet.isFavorited
+                self.retweetStates[index] = tweet.isRetweeted
+            }
+            }) { (error: NSError) -> () in
+                print(error.localizedDescription)
+        }
+    }
+    
 }
 
 // MARK: - Style
@@ -119,24 +130,62 @@ extension TweetsViewController {
         
         //tableview
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 120
+        tableView.estimatedRowHeight = 150
     }
 }
 
 // MARK: - Refresh Control
 extension TweetsViewController {
     func refreshControlAction(refreshControl: UIRefreshControl) {
-        TwitterClient.shareInstance.homeTimeline({ (tweets: [Tweet]) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-            for (index,tweet) in tweets.enumerate() {
-                self.likeStates[index] = tweet.isFavorited
-                self.retweetStates[index] = tweet.isRetweeted
-            }
-            }) { (error: NSError) -> () in
-                print(error.localizedDescription)
-        }
+        offset = 20
+        tweets = []
+        loadMoreData()
         tableView.reloadData()
         refreshControl.endRefreshing()
+    }
+}
+// MARK: - Infinite Scroll
+extension TweetsViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
+                isMoreDataLoading = true
+                // Update position of loadingMoreView, and start loading indicator
+                let frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+                self.loadingMoreView?.frame = frame
+                self.loadingMoreView!.startAnimating()
+                TwitterClient.shareInstance.homeTimelineWithOffset(offset, success:{ (tweets: [Tweet]) -> () in
+                    self.offset += 20
+                    print(self.offset)
+                    self.tweets = tweets
+                    for (index,tweet) in tweets.enumerate() {
+                        self.likeStates[index] = tweet.isFavorited
+                        self.retweetStates[index] = tweet.isRetweeted
+                    }
+                    self.tableView.reloadData()
+                    self.loadingMoreView?.stopAnimating()
+                    self.isMoreDataLoading = false
+                    }) { (error: NSError) -> () in
+                        self.loadingMoreView?.stopAnimating()
+                        print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    func scrollViewSetup() {
+        // Set up Infinite Scroll loading indicator
+        let frame = CGRectMake(0, tableView.contentSize.height, tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight)
+        loadingMoreView = InfiniteScrollActivityView(frame: frame)
+        loadingMoreView!.hidden = true
+        tableView.addSubview(loadingMoreView!)
+        var insets = tableView.contentInset;
+        insets.bottom += InfiniteScrollActivityView.defaultHeight;
+        tableView.contentInset = insets
     }
 }

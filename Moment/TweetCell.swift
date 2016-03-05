@@ -25,10 +25,13 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetUser_timestamp: UILabel!
     @IBOutlet weak var favorCountLabel: UILabel!
     @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var tweetNameLabel: UILabel!
     
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var rectionButton: UIButton!
+    
+    @IBOutlet weak var display_Image: UIImageView!
     
     weak var delegate: TweetCellDelegate?
     
@@ -37,7 +40,7 @@ class TweetCell: UITableViewCell {
     var reactionTap : Bool?
     var current_id: String = ""
     let client = TwitterClient.shareInstance
-
+    var url: NSURL?
 // MARK: - tweets Initialization
     var tweets: Tweet! {
         didSet {
@@ -45,14 +48,41 @@ class TweetCell: UITableViewCell {
             // get tweet id
             current_id = tweets.id_str!
             tweetUser_image.setImageWithURL(tweets.tweetUser_imageUrl!)
-            tweetUser_screenName.text = tweets.tweetUser_screenName
+            tweetUser_screenName.text = tweets.tweetUser_name
             tweetUser_screenName.sizeToFit()
             tweetUser_text.text = tweets.tweetText as? String
             tweetUser_text.sizeToFit()
+            
+            tweetNameLabel.text = "@" + (tweets.tweetUser_screenName)!
+            tweetNameLabel.sizeToFit()
+            tweetNameLabel.tintColor = Color.twitterGrayLight()
+            
             favorCountLabel.text = ("\(tweets.favoritesCount)")
             retweetCountLabel.text = ("\(tweets.retweetCount)")
-            //
+            
             tweetUser_image.layer.cornerRadius = 8
+            
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "HH:mm:ss";
+            let time = formatter.stringFromDate(tweets.timestamp!);
+            tweetUser_timestamp.text = ("\(time)")
+            tweetUser_timestamp.sizeToFit()
+            
+            let media = tweets.media
+            if let media = media {
+                for med in media {
+                    let urltext = med["media_url_https"] as! String
+                    url = NSURL(string: urltext)
+                    if((med["type"] as? String) == "photo") {
+                        display_Image.hidden = false
+                        display_Image.layer.cornerRadius = 10
+                        display_Image.clipsToBounds = true
+                        display_Image.setImageWithURL(url!)
+                    }
+                }
+            } else {
+                display_Image.hidden = true
+            }
             
         }
     }
