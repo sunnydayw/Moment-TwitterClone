@@ -78,7 +78,7 @@ The following **optional** features are implemented:
 - [ ] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [x] Profile Page
 - [ ] Implement the paging view for the user description.
-- [] As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect
+- [ ] As the paging view moves, increase the opacity of the background screen. See the actual Twitter app for this effect
 - [x] Pulling down the profile page should blur and resize the header image.
 - [ ] Account switching
 - [ ] Long press on tab bar to bring up Account view with animation
