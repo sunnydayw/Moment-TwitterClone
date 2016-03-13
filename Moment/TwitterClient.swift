@@ -52,6 +52,26 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
 
     }
+   
+    func getfriendlist(screen_name: String, success:(Int) ->(), failure: (NSError)->()) {
+        GET(" https://api.twitter.com/1.1/friends/ids.json?screen_name=\(screen_name)", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let dictionaries = response as! NSDictionary
+            let count = dictionaries["ids"]?.count ?? 0
+            success(count)
+            }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                failure(error)
+        }
+    }
+    
+    func userTimeline(screen_name: String, success:([Tweet]) ->(), failure: (NSError)->()) {
+        GET("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=\(screen_name)", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let dictionaries = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(dictionaries)
+            success(tweets)
+        }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+            failure(error)
+        }
+    }
     
     func homeTimeline(success: ([Tweet]) -> (), failure: (NSError) -> ()) {
         GET("1.1/statuses/home_timeline.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
@@ -83,6 +103,18 @@ class TwitterClient: BDBOAuth1SessionManager {
         }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
             failure(error)
         })
+    }
+    
+    func publishTweet(text: String, replyToTweetID: Int? = 0, success: (Tweet) -> ()) {
+        if(text == "") {
+            return;
+        }
+        let params = ["status": text, "in_reply_to_status_id": Int((replyToTweetID)!)];
+        POST("1.1/statuses/update.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+                let tweet = Tweet(dictionary: response as! NSDictionary);
+            success(tweet);
+            }) { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+        }
     }
     
     func favorite(tweetId: String,success:(AnyObject) ->(), failure: (NSError) -> ()) {

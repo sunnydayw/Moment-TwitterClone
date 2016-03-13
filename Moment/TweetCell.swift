@@ -10,11 +10,13 @@ import UIKit
 import AFNetworking
 
 @objc  protocol TweetCellDelegate {
-    optional func tweetCellLike(tweetCell: TweetCell, didChangeValue value: Bool)
+    optional func DetailtweetCellLike(tweetCell: TweetCell, didChangeValue value: Bool)
     
-    optional func tweetCellRetweet(tweetCell: TweetCell, didChangeValue value: Bool)
+    optional func DetailtweetCellRetweet(tweetCell: TweetCell, didChangeValue value: Bool)
 
-    optional func tweetCellReaction(tweetCell: TweetCell, didChangeValue value: Bool)
+    optional func DetailtweetCellReaction(tweetCell: TweetCell)
+    
+    optional func switchCell(switchCell: TweetCell)
 }
 
 class TweetCell: UITableViewCell {
@@ -32,6 +34,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var rectionButton: UIButton!
     
     @IBOutlet weak var display_Image: UIImageView!
+    @IBOutlet weak var switchCellButton: UIButton!
     
     weak var delegate: TweetCellDelegate?
     
@@ -74,7 +77,9 @@ class TweetCell: UITableViewCell {
                     let urltext = med["media_url_https"] as! String
                     url = NSURL(string: urltext)
                     if((med["type"] as? String) == "photo") {
-                        display_Image.hidden = false
+                        //display_Image.hidden = false
+                        display_Image.frame = CGRectMake(73, 136, 200, 200)
+                        display_Image.updateConstraints()
                         display_Image.layer.cornerRadius = 10
                         display_Image.clipsToBounds = true
                         display_Image.setImageWithURL(url!)
@@ -82,6 +87,8 @@ class TweetCell: UITableViewCell {
                 }
             } else {
                 display_Image.hidden = true
+                display_Image.frame = CGRectMake(73, 136, 20, 200)
+                display_Image.updateConstraints()
             }
             
         }
@@ -92,6 +99,8 @@ class TweetCell: UITableViewCell {
         super.awakeFromNib()
         likeButton.addTarget(self, action: "likeStatusChanged", forControlEvents: UIControlEvents.TouchUpInside)
         retweetButton.addTarget(self, action: "retweetStatusChanged", forControlEvents: UIControlEvents.TouchUpInside)
+        rectionButton.addTarget(self, action: "reactionStatusChanged", forControlEvents: UIControlEvents.TouchUpInside)
+        switchCellButton.addTarget(self, action: "click", forControlEvents: UIControlEvents.TouchUpInside)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -125,7 +134,7 @@ extension TweetCell {
                     print(error.localizedDescription)
             })
         }
-        delegate?.tweetCellLike?(self, didChangeValue: likeTap!)
+        delegate?.DetailtweetCellLike?(self, didChangeValue: likeTap!)
     }
     
 // MARK: - Retweet Button
@@ -153,12 +162,16 @@ extension TweetCell {
             })
             
         }
-        delegate?.tweetCellRetweet?(self, didChangeValue: retweetTap!)
+        delegate?.DetailtweetCellRetweet?(self, didChangeValue: retweetTap!)
     }
     
 // MARK: - reaction Button
     func reactionStatusChanged(){
-        delegate?.tweetCellReaction?(self, didChangeValue: reactionTap!)
+        delegate?.DetailtweetCellReaction?(self)
+    }
+    
+    func click(){
+        delegate?.switchCell!(self)
     }
     
 }

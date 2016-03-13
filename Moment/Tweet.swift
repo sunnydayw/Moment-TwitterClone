@@ -23,7 +23,8 @@ class Tweet: NSObject {
     var isFavorited: Bool?
     var isRetweeted: Bool?
     var isReacted: Bool?
-    var media: [NSDictionary]?;
+    var media: [NSDictionary]?
+    var id_Int: Int?
     
     init(dictionary: NSDictionary) {
         self.dictionary = dictionary
@@ -56,6 +57,7 @@ class Tweet: NSObject {
         }
         
         id_str = dictionary["id_str"] as? String
+        id_Int = dictionary["id"] as? Int
         let likeStatus = dictionary["favorited"] as? Int
         if likeStatus == 0 {
             isFavorited = false

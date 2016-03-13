@@ -17,7 +17,7 @@ class TweetsViewController: UIViewController, TweetCellDelegate {
     var offset = 20
     var isMoreDataLoading = false
     var loadingMoreView:InfiniteScrollActivityView?
-
+    
     
     let refreshControl = UIRefreshControl()
     
@@ -30,7 +30,6 @@ class TweetsViewController: UIViewController, TweetCellDelegate {
         tableView.dataSource = self
         //tweets = []
         loadMoreData()
-
         addStyle()
         
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
@@ -43,10 +42,37 @@ class TweetsViewController: UIViewController, TweetCellDelegate {
     @IBAction func onLogoutButton(sender: AnyObject) {
         TwitterClient.shareInstance.logout()
     }
+    
+    func switchCell(switchCell: TweetCell) {
+        let indexPath =  tableView.indexPathForCell(switchCell)
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle());
+        let vc = storyboard.instantiateViewControllerWithIdentifier("ProfileViewNavigationController") as! UINavigationController;
+        let profile = vc.viewControllers.first as! ProfileViewController;
+        profile.tweet = tweets![(indexPath?.row)!]
+        self.presentViewController(vc, animated: true, completion: nil);
+        
+    }
+    func DetailtweetCellReaction(tweetCell: TweetCell) {
+        let indexPath =  tableView.indexPathForCell(tweetCell)
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = storyboard.instantiateViewControllerWithIdentifier("composeNavigationController") as! UINavigationController
+        let composeVC = vc.viewControllers.first as! ComposeViewController;
+            composeVC.replyToTweet = tweets![(indexPath?.row)!]
+        self.presentViewController(vc, animated: true, completion: nil);
 
+    }
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+        if (segue.identifier == "pushToDetail" ) {
+            //Dispatch.async(delay: 0) {self.timer.invalidate()}
+            let cell = sender as! UITableViewCell
+            let index = tableView.indexPathForCell(cell)
+            let tweet = tweets![(index?.row)!]
+            let detailviewcontroller = segue.destinationViewController as! TweetDetailViewController
+            detailviewcontroller.tweet = tweet
+        }
     }
 
 }
@@ -162,7 +188,6 @@ extension TweetsViewController: UIScrollViewDelegate {
                 self.loadingMoreView!.startAnimating()
                 TwitterClient.shareInstance.homeTimelineWithOffset(offset, success:{ (tweets: [Tweet]) -> () in
                     self.offset += 20
-                    print(self.offset)
                     self.tweets = tweets
                     for (index,tweet) in tweets.enumerate() {
                         self.likeStates[index] = tweet.isFavorited
