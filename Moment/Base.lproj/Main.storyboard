@@ -21,7 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qux-yq-NKw">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Twitter_logo_white_48" translatesAutoresizingMaskIntoConstraints="NO" id="mni-Xi-7OI">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Twitter_logo_white_48" translatesAutoresizingMaskIntoConstraints="NO" id="mni-Xi-7OI">
                                         <rect key="frame" x="164" y="310" width="48" height="48"/>
                                     </imageView>
                                 </subviews>
